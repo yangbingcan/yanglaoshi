@@ -26,6 +26,7 @@
 | frontend-design-workflow | 前端设计规范、设计到代码工作流 | `.trae/skills/frontend-design-workflow/SKILL.md` |
 | jianying-editor | 剪映AI自动化剪辑、字幕生成、视频导出 | `.trae/skills/jianying-editor/SKILL.md` |
 | skill-creator | 创建新的自定义技能 | `.trae/skills/skill-creator/SKILL.md` |
+| skill-sync | 技能同步管理（推送/下载技能到远程仓库） | `.trae/skills/skill-sync/SKILL.md` |
 | trae-ide-auto-growth-skill-manager | 自动沉淀对话经验、技能迭代优化 | `.trae/skills/trae-ide-auto-growth-skill-manager/SKILL.md` |
 
 ---
@@ -82,6 +83,8 @@
     │   └── SKILL.md
     ├── skill-creator/
     │   └── SKILL.md
+    ├── skill-sync/
+    │   └── SKILL.md
     └── trae-ide-auto-growth-skill-manager/
         └── SKILL.md
 ```
@@ -104,8 +107,9 @@
 - "分析这个Excel" → 触发 data-analysis-assistant
 - "帮我写个测试用例" → 触发 test-case-generator
 - "优化这个提示词" → 触发 prompt-optimize
+- "推送技能到仓库" → 触发 skill-sync
 
 ---
 
 *清单生成时间: 2026-03-12*
-*技能总数: 23个*
+*技能总数: 24个*
