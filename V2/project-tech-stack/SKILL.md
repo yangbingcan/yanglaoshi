@@ -151,11 +151,56 @@ description: "进行项目技术选型。在产品概述确定后使用，推荐
 2. 使用 /project-dev-standards 制定开发规范
 ```
 
+## 【新增】UI设计系统集成
+
+### 触发时机
+技术栈文档生成并确认后。
+
+### 执行步骤
+1. 读取刚生成的 `specs/技术栈.md`
+2. 提取前端技术栈信息：
+   - 框架类型（React/Vue/Angular/Next.js等）
+   - UI组件库（Ant Design/Material UI/shadcn等）
+   - 样式方案（Tailwind/CSS-in-JS等）
+3. 确定技术栈对应的 stacks 文件：
+   | 技术栈 | 对应文件 |
+   |-------|---------|
+   | React | stacks/react.csv |
+   | Vue | stacks/vue.csv |
+   | Next.js | stacks/nextjs.csv |
+   | Nuxt.js | stacks/nuxtjs.csv |
+   | Angular | stacks/angular.csv |
+   | Svelte | stacks/svelte.csv |
+   | Astro | stacks/astro.csv |
+   | Flutter | stacks/flutter.csv |
+   | React Native | stacks/react-native.csv |
+   | SwiftUI | stacks/swiftui.csv |
+   | shadcn/ui | stacks/shadcn.csv |
+   | Tailwind | stacks/html-tailwind.csv |
+4. 调用 `ui-design-system` 技能，传递以下参数：
+   - `techStack`: 填入前端框架名称
+   - `uiLibrary`: 填入UI组件库名称
+   - `styleSolution`: 填入样式方案
+5. 在完成报告中说明UI设计规范已根据技术栈生成
+
+### 特殊情况处理
+- **桌面应用**：如果项目是桌面应用（Tauri/Electron），在技术栈中标注 `platform: desktop`，UI设计规范会考虑桌面应用特性
+- **移动应用**：如果项目是移动应用，标注 `platform: mobile`
+- **Web应用**：默认为Web应用
+
+### 输出
+- `specs/技术栈.md` - 技术栈选型文档（包含技术栈标识）
+- 触发 `ui-design-system` 生成设计规范
+
+---
+
 ## 输出
 - `specs/技术栈.md` - 技术栈选型文档
+- 触发 `ui-design-system` 生成设计规范
 
 ## 注意事项
 1. 推荐最合适的技术，而不是最热门的
 2. 考虑团队的实际能力
 3. 考虑长期维护成本
 4. 提供多个方案供选择
+5. **【新增】** 技术栈确定后，自动生成匹配的UI设计规范

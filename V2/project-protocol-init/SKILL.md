@@ -41,15 +41,25 @@ description: "项目协议初始化。在新项目启动时使用，自动创建
     └── ui-design-data/  # UI设计数据素材
 ```
 
-### 3. 下载 UI 设计数据素材
+### 3. 创建 UI 设计数据目录
+
+创建目录结构，但**不自动下载** UI 设计数据素材（由用户手工下载）：
+
+```
+docs/ui-design-data/
+docs/ui-design-data/stacks/
+```
+
+**数据源信息（供用户参考）**：
 
 **GitHub 仓库地址**：`https://github.com/nextlevelbuilder/ui-ux-pro-max-skill`
 
 **数据源路径**：`src/ui-ux-pro-max/data/`
 
-**目标存放路径**：`docs/ui-design-data/`
+**需要下载的文件列表**：
 
-**需要下载的 CSV 文件列表**：
+#### 3.1 基础数据文件（存放至 `docs/ui-design-data/`）
+
 | 文件名 | 内容说明 |
 |--------|---------|
 | `colors.csv` | 配色方案 |
@@ -67,18 +77,26 @@ description: "项目协议初始化。在新项目启动时使用，自动创建
 | `react-performance.csv` | React性能优化 |
 | `ui-reasoning.csv` | UI推理规则 |
 
-**下载方式**：
-使用 GitHub Raw URL 格式下载每个文件：
-```
-https://raw.githubusercontent.com/nextlevelbuilder/ui-ux-pro-max-skill/main/src/ui-ux-pro-max/data/{文件名}
-```
+#### 3.2 技术栈数据文件（存放至 `docs/ui-design-data/stacks/`）
 
-**执行步骤**：
-1. 检查 `docs/ui-design-data/` 目录是否存在
-2. 如果不存在，创建该目录
-3. 遍历文件列表，逐个下载 CSV 文件
-4. 保存到 `docs/ui-design-data/` 目录
-5. 记录下载结果（成功/失败）
+| 文件名 | 内容说明 |
+|--------|---------|
+| `react.csv` | React 技术栈组件规范 |
+| `vue.csv` | Vue 技术栈组件规范 |
+| `nextjs.csv` | Next.js 技术栈规范 |
+| `nuxtjs.csv` | Nuxt.js 技术栈规范 |
+| `nuxt-ui.csv` | Nuxt UI 组件库规范 |
+| `angular.csv` | Angular 技术栈规范 |
+| `svelte.csv` | Svelte 技术栈规范 |
+| `astro.csv` | Astro 技术栈规范 |
+| `shadcn.csv` | shadcn/ui 组件库规范 |
+| `html-tailwind.csv` | HTML + Tailwind 规范 |
+| `flutter.csv` | Flutter 技术栈规范 |
+| `react-native.csv` | React Native 规范 |
+| `swiftui.csv` | SwiftUI 技术栈规范 |
+| `jetpack-compose.csv` | Jetpack Compose 规范 |
+| `laravel.csv` | Laravel 技术栈规范 |
+| `threejs.csv` | Three.js 3D库规范 |
 
 ### 4. 创建协议文件
 
@@ -231,30 +249,21 @@ AI 的本能是满足用户需求，但在本工作流中，**盲目满足 = 破
 - docs/开发记录/
 - docs/BUG修复文档/
 - docs/ui-design-data/
+- docs/ui-design-data/stacks/
 
 已创建协议文件：
 - specs/GUARDRAILS.md (边界守卫协议)
 - specs/PROJECT-CONTEXT.md (项目上下文协议)
 
-已下载 UI 设计数据素材：
-- colors.csv ✓
-- styles.csv ✓
-- typography.csv ✓
-- products.csv ✓
-- landing.csv ✓
-- ux-guidelines.csv ✓
-- app-interface.csv ✓
-- charts.csv ✓
-- design.csv ✓
-- draft.csv ✓
-- google-fonts.csv ✓
-- icons.csv ✓
-- react-performance.csv ✓
-- ui-reasoning.csv ✓
+⚠️ UI 设计数据素材需要手工下载：
+- 数据源：https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+- 路径：src/ui-ux-pro-max/data/
+- 目标：docs/ui-design-data/
 
 下一步：
-1. 使用 /project-requirements-clarification 开始需求澄清
-2. 或使用 /project-product-overview 生成产品概述
+1. 手工下载 UI 设计数据素材到 docs/ui-design-data/ 目录
+2. 使用 /project-requirements-clarification 开始需求澄清
+3. 或使用 /project-product-overview 生成产品概述
 ```
 
 ## 输出
@@ -263,18 +272,19 @@ AI 的本能是满足用户需求，但在本工作流中，**盲目满足 = 破
 - `specs/GUARDRAILS.md` - 边界守卫协议
 - `specs/PROJECT-CONTEXT.md` - 项目上下文协议
 - `docs/` 目录结构
-- `docs/ui-design-data/` - UI设计数据素材（14个CSV文件）
+- `docs/ui-design-data/` - UI设计数据目录（空目录，需用户手工下载素材）
+- `docs/ui-design-data/stacks/` - 技术栈数据目录（空目录，需用户手工下载素材）
 
 ## 注意事项
 
 1. **幂等性**：如果文件已存在，不要覆盖，而是提示用户
 2. **位置正确**：必须在项目根目录执行
 3. **第一步**：这是使用 SpecForge 工作流的第一步，必须在其他技能之前执行
-4. **网络依赖**：下载 UI 设计数据素材需要网络连接，如果下载失败，提示用户手动下载或稍后重试
+4. **手工下载**：UI 设计数据素材需要用户手工下载，技能只创建空目录
 
 ## 手动更新 UI 素材
 
-当用户说"更新UI素材"时，执行以下步骤：
-1. 检查 `docs/ui-design-data/` 目录是否存在
-2. 重新下载所有 CSV 文件（覆盖现有文件）
-3. 报告更新结果
+当用户说"更新UI素材"时，提示用户：
+1. 访问 `https://github.com/nextlevelbuilder/ui-ux-pro-max-skill`
+2. 进入 `src/ui-ux-pro-max/data/` 目录
+3. 下载所需 CSV 文件到 `docs/ui-design-data/` 目录
