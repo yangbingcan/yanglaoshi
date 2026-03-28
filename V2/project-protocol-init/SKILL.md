@@ -27,12 +27,15 @@ description: "项目协议初始化。在新项目启动时使用，自动创建
 - `specs/GUARDRAILS.md`
 - `specs/PROJECT-CONTEXT.md`
 - `docs/ui-design-data/` 目录
+- `.trae/rules/project_rules.md`
 
 ### 2. 创建目录结构
 
 如果不存在，创建以下目录：
 ```
 项目根目录/
+├── .trae/
+│   └── rules/        # 项目规则文件
 ├── specs/
 │   └── features/     # 功能级文档存放位置
 └── docs/
@@ -100,7 +103,75 @@ docs/ui-design-data/stacks/
 
 ### 4. 创建协议文件
 
-#### 4.1 创建边界守卫协议 (GUARDRAILS.md)
+#### 4.1 创建项目规则文件 (project_rules.md)
+
+在 `.trae/rules/project_rules.md` 中写入以下内容：
+
+```markdown
+# 项目强制规则
+
+> **每次对话开始时，必须先读取以下两个文件：**
+> - `specs/GUARDRAILS.md` - 边界守卫协议
+> - `specs/PROJECT-CONTEXT.md` - 项目上下文协议
+
+## 技能匹配强制协议
+
+**在执行任何任务之前，必须强制执行以下流程：**
+
+### 第一步：技能匹配检查
+扫描所有可用技能，检查是否有匹配的技能。
+
+**可用技能清单**：
+| 技能名称 | 适用场景 |
+|---------|---------|
+| `project-protocol-init` | 新项目启动，初始化协议文件 |
+| `project-requirements-clarification` | 项目启动阶段，澄清原始想法 |
+| `project-product-overview` | 需求澄清后，生成产品概述 |
+| `project-tech-stack` | 产品概述确定后，进行技术选型 |
+| `project-structure` | 技术栈确定后，定义目录结构 |
+| `project-dev-standards` | 技术栈确定后，制定代码规范 |
+| `project-roadmap-planning` | 规划功能开发顺序和里程碑 |
+| `project-initialization` | 读取 specs/ 定义，创建项目结构 |
+| `feature-requirements-clarification` | 创建功能前，明确验收标准 |
+| `feature-tech-design` | 功能需求明确后，设计技术方案 |
+| `feature-task-planning` | 技术方案确定后，拆解开发任务 |
+| `feature-implementation` | TDD 驱动执行开发任务 |
+| `feature-auto-pipeline` | 自动化开发流水线 |
+| `feature-evolution` | 功能迭代变更管理 |
+| `bugfix-workflow` | 修复 BUG/排查错误/定位问题 |
+| `ui-design-system` | UI/UX设计，生成设计系统和组件规范 |
+| `skill-creator` | 创建新技能 |
+
+### 第二步：用户指定技能验证
+如果用户指定了技能：
+1. 检查技能是否适合当前任务
+2. 如果不适合，必须主动说明原因并建议替代方案
+3. 等待用户确认后再执行
+
+### 第三步：强制调用匹配技能
+如果有匹配的技能，必须立即调用 Skill 工具，禁止跳过。
+
+### 违规判定标准
+以下行为视为违规：
+1. 没有检查技能就执行任务
+2. 用户指定的技能不适合，但没有说明
+3. 有匹配的技能但没有调用
+4. 调用了错误的技能
+
+---
+
+## 初始化命令
+
+当用户发送以下命令时，必须立即调用 `project-protocol-init` 技能：
+- `init`
+- `协议初始化`
+- `初始化`
+- `project-protocol-init`
+
+调用技能后，必须读取 `specs/GUARDRAILS.md` 和 `specs/PROJECT-CONTEXT.md` 两个文件。
+```
+
+#### 4.2 创建边界守卫协议 (GUARDRAILS.md)
 
 在 `specs/GUARDRAILS.md` 中写入以下内容：
 
@@ -136,7 +207,7 @@ AI 的本能是满足用户需求，但在本工作流中，**盲目满足 = 破
     *   *"作为技术主管，我现在的职责是制定作战计划。请先确认这份任务清单的合理性..."*
 ```
 
-#### 4.2 创建项目上下文协议 (PROJECT-CONTEXT.md)
+#### 4.3 创建项目上下文协议 (PROJECT-CONTEXT.md)
 
 在 `specs/PROJECT-CONTEXT.md` 中写入以下内容：
 
@@ -243,6 +314,7 @@ AI 的本能是满足用户需求，但在本工作流中，**盲目满足 = 破
 === 项目协议初始化完成 ===
 
 已创建目录：
+- .trae/rules/
 - specs/
 - specs/features/
 - docs/
@@ -252,22 +324,30 @@ AI 的本能是满足用户需求，但在本工作流中，**盲目满足 = 破
 - docs/ui-design-data/stacks/
 
 已创建协议文件：
+- .trae/rules/project_rules.md (项目规则文件)
 - specs/GUARDRAILS.md (边界守卫协议)
 - specs/PROJECT-CONTEXT.md (项目上下文协议)
 
+⚠️ 技能仓库需要手工下载更新：
+- 数据源：`https://github.com/yangbingcan/yanglaoshi.git`
+- 目标：.trae/skills/
+
 ⚠️ UI 设计数据素材需要手工下载：
-- 数据源：https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+- 数据源：`https://github.com/nextlevelbuilder/ui-ux-pro-max-skill`
 - 路径：src/ui-ux-pro-max/data/
 - 目标：docs/ui-design-data/
 
 下一步：
-1. 手工下载 UI 设计数据素材到 docs/ui-design-data/ 目录
-2. 使用 /project-requirements-clarification 开始需求澄清
-3. 或使用 /project-product-overview 生成产品概述
+1. 手工下载技能仓库更新到 .trae/skills/ 目录
+2. 手工下载 UI 设计数据素材到 docs/ui-design-data/ 目录
+3. 使用 /project-requirements-clarification 开始需求澄清
+4. 或使用 /project-product-overview 生成产品概述
 ```
 
 ## 输出
 
+- `.trae/rules/` 目录
+- `.trae/rules/project_rules.md` - 项目规则文件
 - `specs/` 目录结构
 - `specs/GUARDRAILS.md` - 边界守卫协议
 - `specs/PROJECT-CONTEXT.md` - 项目上下文协议
